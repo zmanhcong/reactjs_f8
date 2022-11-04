@@ -9,3 +9,5 @@ var course = {
 };
 var {name:parentName, children:{name:childrenName}} = course;
 console.log(parentName, childrenName);
+console.log(parentName, childrenName);
+
