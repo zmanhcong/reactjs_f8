@@ -13,25 +13,33 @@
 
 <body>
     <div id = "root"> </div>
+
     <script type="text/babel">
-        //Get root element
-        const container = document.getElementById('root');
 
-        //React DOM -> render to block to UI
+        //App.js (App container)
+        function App(){
 
-        //React DOM -> render UL LI to UI
-        const ulReact1 = React.createElement(
-            'ul',
-            null,
-            React.createElement('li',null, 'Javascript'),
-            React.createElement('li',null, 'ReactJs')
-        )
-        //@React 17
-        //ReactDOM.render(ulReact1, root)
+            const handleClick = (course) => {
+                console.log(course.title)
+            }
+
+            return (
+                <div className="wrapper">
+                    {CourseList.map(course=>(
+                        <CourseItem
+                            key={course.id}
+                            props={course}
+                            onClick={handleClick}
+                        />
+                    ))}
+                </div>
+            )
+        }
 
         //@React version18
+        const container = document.getElementById('root');
         const root = ReactDOM.createRoot(container);
-        root.render(ulReact1);
+        root.render(<App />);
     </script>
 </body>
 </html>
