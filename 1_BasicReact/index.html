@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reaxt js</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+
+</head>
+
+
+<body>
+    <div id = "root"> </div>
+    <script >
+        //Hiển thị H1: hello guys với DOM
+        const root = document.getElementById('root')
+        const h1DOM = document.createElement('h1')
+        h1DOM.innerText = "Hello guys"
+        root.appendChild(h1DOM)
+
+        //Hiển thị ul-li với DOM
+        const ulDOM = document.createElement('ul')
+        const liDOM1 = document.createElement('li')
+        const liDOM2 = document.createElement('li')
+        liDOM1.innerText = "Javascript"
+        liDOM2.innerText = "PHP"
+        ulDOM.appendChild(liDOM1)
+        ulDOM.appendChild(liDOM2)
+        document.body.appendChild(ulDOM)
+
+        //Hiển thị ul-li với React
+        const ulReact = React.createElement(
+            'ul',
+            {
+                id : 'ul-id',
+                style:'color: red, font-size:30px'
+            },
+            React.createElement('li', null, 'Javascript'),
+            React.createElement('li', null, 'PHP'),
+        )
+        console.log(ulReact)
+
+    </script>
+</body>
+</html>
+
