@@ -1,3 +1,8 @@
+/*
+1. Chức năng preview ảnh, show ảnh mà không cần lưu vào database
+2. Sau khi tạo image tạm, mình cần clean ảnh đó đi khi được chèn ảnh khác vào. -> tăng performance
+
+*/
 
 import {useEffect, useState} from 'react'
 
@@ -18,7 +23,7 @@ function Content() {
         const file = e.target.files[0]
         file.preview = URL.createObjectURL(file)
         // console.log(URL.createObjectURL(file));
-        setAvater(file) 
+        setAvater(file)
     }
        
     return (

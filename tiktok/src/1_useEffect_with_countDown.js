@@ -18,16 +18,9 @@
     - Remove listenner / Usubcribe
     - Clear timer
 
-------------------------------------------------------------
+*/
 
-Process chạy của useEffect
-1.Cập nhật lại state
-2.Cập nhật DOM(mutated) cập nhật 1 phần nhỏ trong phần lơn
-3.render lại UI
-4.Gọi cleanup nếu deps thay đổi
-5.gọi useEffect callback ( re-call sau khi clean nha.)
-
-------------------------------------------------------------
+/* 
 Effect có 3 trường hợp dưới đây
     1. useEffect(callback)
     2. useEffect(callback, [])  ==> cái này hay được dùng cho call API, vì nó chỉ được gọi 1 lần mỗi khi component mounted ( vì nếu gọi nhiều lần thì performance không tốt)
@@ -41,32 +34,28 @@ Effect có 3 trường hợp dưới đây
 1.Callback luôn được gọi sau khi component mounted
 
 */
-
 import {useEffect, useState} from 'react'
 
+
 function Content() {
-    const [title, setTitle] = useState('')
-    const [posts, setPosts] = useState([])
 
-    useEffect( () => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(res=> res.json())
-            .then(posts => {
-                setPosts(posts)
-            })
-    }, [])    // Dùng cái này "[]" để không bị re-render mỗi khi component được mount
+    const [countdow, setCountdown] = useState(180)
 
+    useEffect( ()  => {
+        const timerId = setTimeout( () => {
+            setCountdown(countdow - 1)
+            console.log(countdow);
+        }, 1000)
+
+        //Cleanup func. khi mà un-mount thì remove function.
+        return () => clearTimeout(timerId)
+
+    }, [countdow])   // mỗi lần countdow change thì cục useEffect sẽ re-render 1 lần nữa. nên là countdown được.
+
+       
     return (
         <div>
-            <input
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-            ></input>
-            <ul>
-                {posts.map(post => (
-                    <li key={post.id}>{post.title}</li>
-                ))}
-            </ul>
+            <h1>{countdow}</h1>
         </div>
     )
 }

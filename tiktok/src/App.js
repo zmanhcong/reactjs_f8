@@ -9,7 +9,7 @@ function App() {
     <div className="App" style={{padding: 20 , margin: 30 }}>
         <button
             onClick={() => setShow(!show)}
-        >Toglle</button>
+        >Mount</button>
         {show && <Content/>}
       
     </div>

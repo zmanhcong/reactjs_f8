@@ -28,6 +28,7 @@ Process chạy của useEffect
 5.gọi useEffect callback ( re-call sau khi clean nha.)
 
 ------------------------------------------------------------
+ 
 Effect có 3 trường hợp dưới đây
     1. useEffect(callback)
     2. useEffect(callback, [])  ==> cái này hay được dùng cho call API, vì nó chỉ được gọi 1 lần mỗi khi component mounted ( vì nếu gọi nhiều lần thì performance không tốt)
@@ -41,30 +42,44 @@ Effect có 3 trường hợp dưới đây
 1.Callback luôn được gọi sau khi component mounted
 
 */
-
 import {useEffect, useState} from 'react'
+
+const tabs = ['posts', 'comments', 'albums']
 
 function Content() {
     const [title, setTitle] = useState('')
     const [posts, setPosts] = useState([])
+    const [type, setType] = useState('posts')
+
+    console.log("type :", type)
 
     useEffect( () => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch(`https://jsonplaceholder.typicode.com/${type}`)   //type thay đổi thì đoạn code này sẽ re-load lại, nên là sẽ fetch ra 1 link khác.
             .then(res=> res.json())
             .then(posts => {
                 setPosts(posts)
             })
-    }, [])    // Dùng cái này "[]" để không bị re-render mỗi khi component được mount
+    }, [type])   //dùng deps là [type] để re-load khi type được thay đổi.
 
     return (
         <div>
+            {tabs.map((tab,index) => (
+                <button
+                    key={index}
+                    style={type === tab ? {color: '#fff', backgroundColor: '#333'} : {}}
+                    onClick={() => setType(tab)}
+                >
+                    {tab}
+                </button>
+            ))}
+
             <input
                 value={title}
                 onChange={e => setTitle(e.target.value)}
             ></input>
             <ul>
                 {posts.map(post => (
-                    <li key={post.id}>{post.title}</li>
+                    <li key={post.id}>{post.title || post.name}</li>
                 ))}
             </ul>
         </div>
