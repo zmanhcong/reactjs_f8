@@ -1,20 +1,22 @@
-import {useState } from 'react'
-import Content from './1_useEffect';
+import {useState, memo} from "react"
+import Content from "./2_Content"
+
+//1.memo() -> Higher Order Component (HOC)
+//2.useCallback() : học memo() trước để lấy nên tảng học useCallback()
 
 function App() {
-    
-    const [show, setShow] = useState(false)
+    const [count, setCount] = useState(0)
 
-  return (
-    <div className="App" style={{padding: 20 , margin: 30 }}>
-        <button
-            onClick={() => setShow(!show)}
-        >Mount</button>
-        {show && <Content/>}
-      
-    </div>
-  );
+    const handleIncrease = () => {
+        setCount ( count + 1)
+    }
+
+    return (
+        <div style={{padding: '10px 32px'}}>
+            <Content handleIncrease = {onhandleIncrease}/>
+            <h1>{count}</h1>
+        </div>
+    )
 }
 
-
-export default App;
+export default App
