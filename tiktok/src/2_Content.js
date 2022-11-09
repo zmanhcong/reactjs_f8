@@ -1,6 +1,6 @@
 import {memo} from 'react'
 
-function Content(onhandleIncrease) {
+function Content({onhandleIncrease}) {
 
     console.log("Re-render");
     return (

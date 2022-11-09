@@ -10,10 +10,9 @@ function App() {
 
 
 const handleSubmit = () => {
-    
     setJobs(prev => {
         const newJobs = [...prev,job]
-        const jsonJobs = JSON.stringify(newJobs)
+        const jsonJobs = JSON.stringify(newJobs) //js to json > '{"x":5,"y":6}'
         console.log("json is", jsonJobs)
         localStorage.setItem('jobs', jsonJobs)
 
