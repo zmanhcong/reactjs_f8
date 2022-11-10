@@ -1,14 +1,13 @@
-import {memo} from 'react'
+import Paragraph from './Paragraph'
 
 function Content({onhandleIncrease}) {
 
     console.log("Re-render");
     return (
         <>
-            <h1>Hello</h1>
-            <button onClick={onhandleIncrease}>Increes</button>
+            <Paragraph/>
         </>
     )
 }
 
-export default memo(Content)
+export default Content
