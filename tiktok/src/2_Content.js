@@ -1,13 +1,10 @@
 import Paragraph from './Paragraph'
 
-function Content({onhandleIncrease}) {
-
-    console.log("Re-render");
+function Content() {
     return (
         <>
             <Paragraph/>
         </>
     )
 }
-
 export default Content
